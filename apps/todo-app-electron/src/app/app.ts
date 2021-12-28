@@ -102,7 +102,13 @@ export default class App {
     } else {
       App.mainWindow.loadURL(
         format({
-          pathname: join(__dirname, "..", rendererAppName, "index.html"),
+          pathname: join(
+            __dirname,
+            "..",
+            rendererAppName,
+            "exported",
+            "index.html"
+          ),
           protocol: "file:",
           slashes: true,
         })

@@ -1,12 +1,19 @@
 {
   "name": "sea-turtle",
+  "description": "Yet another todo app.",
   "version": "0.0.0",
+  "author": "@vic-shihang-li",
   "license": "MIT",
+  "main": "dist/apps/todo-app-electron/main.js",
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "build:todo": "nx build todo-app --prod"
+    "build:todo": "nx build todo-app --prod",
+    "build-electron:todo": "nx run-many --target=build --projects=todo-app,todo-app-electron --parallel && nx export todo-app",
+    "pack-electron:todo": "electron-builder --dir --config electron-builder.json",
+    "dist-electron:todo": "electron-builder --config electron-builder.json",
+    "postinstall": "electron-builder install-app-deps"
   },
   "private": true,
   "dependencies": {
@@ -43,6 +50,7 @@
     "cypress": "^9.1.0",
     "cz-conventional-changelog": "^3.3.0",
     "electron": "^16.0.5",
+    "electron-builder": "^22.14.5",
     "eslint": "8.2.0",
     "eslint-config-next": "12.0.7",
     "eslint-config-prettier": "8.1.0",

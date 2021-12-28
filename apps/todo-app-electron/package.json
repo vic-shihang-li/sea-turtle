@@ -1,0 +1,7 @@
+{
+  "name": "sea-turtle",
+  "author": "@vic-shihang-li",
+  "description": "Yet another todo app.",
+  "version": "0.0.0",
+  "main": "dist/apps/todo-app-electron/main.js"
+}
