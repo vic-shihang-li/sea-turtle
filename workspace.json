@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "todo-app": "apps/todo-app",
-    "todo-app-e2e": "apps/todo-app-e2e"
+    "todo-app-e2e": "apps/todo-app-e2e",
+    "todo-app-electron": "apps/todo-app-electron"
   }
 }
