@@ -1,0 +1,30 @@
+name: Build Electron App
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-electron:
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout [main]
+        with:
+          fetch-depth: 0
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+      - run: npm install
+      - run: npm build-electron:todo && npm dist-electron:todo
