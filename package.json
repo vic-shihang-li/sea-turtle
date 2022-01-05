@@ -1,12 +1,20 @@
 {
   "name": "sea-turtle",
+  "description": "Yet another todo app.",
   "version": "0.0.0",
+  "author": "@vic-shihang-li",
   "license": "MIT",
+  "main": "dist/apps/todo-app-electron/main.js",
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "build:todo": "nx build todo-app --prod"
+    "build-todo:web": "nx build todo-app --prod",
+    "build-todo:electron": "npm run compile-todo:electron && npm run pack-todo:electron",
+    "compile-todo:electron": "nx run-many --target=build --projects=todo-app,todo-app-electron --parallel && nx export todo-app",
+    "pack-todo:electron": "electron-builder --config electron-builder.json --publish never",
+    "packdir-todo:electron": "npm run pack-todo:electron -- --dir",
+    "postinstall": "electron-builder install-app-deps"
   },
   "private": true,
   "dependencies": {
@@ -26,6 +34,7 @@
     "@nrwl/eslint-plugin-nx": "13.4.1",
     "@nrwl/jest": "13.4.1",
     "@nrwl/linter": "13.4.1",
+    "@nrwl/node": "^13.4.1",
     "@nrwl/react": "13.4.1",
     "@nrwl/tao": "13.4.1",
     "@nrwl/web": "13.4.1",
@@ -41,6 +50,8 @@
     "babel-jest": "27.2.3",
     "cypress": "^9.1.0",
     "cz-conventional-changelog": "^3.3.0",
+    "electron": "^16.0.5",
+    "electron-builder": "^22.14.5",
     "eslint": "8.2.0",
     "eslint-config-next": "12.0.7",
     "eslint-config-prettier": "8.1.0",

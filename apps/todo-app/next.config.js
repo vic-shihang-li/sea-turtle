@@ -10,6 +10,10 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
+  // this is required for static file export used in electron. without this,
+  // electron cannot reference js and css imports correctly.
+  // See discussion: https://github.com/vercel/next.js/discussions/32216
+  assetPrefix: "./",
 };
 
 module.exports = withNx(nextConfig);

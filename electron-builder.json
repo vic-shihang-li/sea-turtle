@@ -1,0 +1,8 @@
+{
+  "appId": "sea.turtle",
+  "mac": {
+    "category": "productivity"
+  },
+  "directories": {},
+  "files": ["!**/*", "dist/apps/todo-app", "dist/apps/todo-app-electron"]
+}

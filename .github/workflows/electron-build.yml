@@ -1,0 +1,62 @@
+name: Build Electron App
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-electron:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout [main]
+        with:
+          fetch-depth: 0
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+
+      - name: Install dependencies
+        run: npm install
+      - name: Build sea-turtle as an electron app
+        run: npm run build-todo:electron
+
+      # upload artifacts (one variant for each os)
+      - name: Upload artifact (win)
+        if: ${{ matrix.os == 'windows-latest' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: sea-turtle-${{ matrix.os }}.nsis
+          path: ./dist/sea-turtle*.exe
+          if-no-files-found: error
+
+      - name: Upload artifact (macos)
+        if: ${{ matrix.os == 'macos-latest' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: sea-turtle-${{ matrix.os }}.zip
+          path: ./dist/sea-turtle*.zip
+          if-no-files-found: error
+
+      - name: Upload artifact (linux)
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: sea-turtle-${{ matrix.os }}.AppImage
+          path: ./dist/sea-turtle*.AppImage
+          if-no-files-found: error

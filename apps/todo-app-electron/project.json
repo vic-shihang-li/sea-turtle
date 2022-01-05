@@ -1,0 +1,53 @@
+{
+  "root": "apps/todo-app-electron",
+  "sourceRoot": "apps/todo-app-electron/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/todo-app-electron",
+        "main": "apps/todo-app-electron/src/main.ts",
+        "tsConfig": "apps/todo-app-electron/tsconfig.app.json",
+        "assets": ["apps/todo-app-electron/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/todo-app-electron/src/environments/environment.ts",
+              "with": "apps/todo-app-electron/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "todo-app-electron:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/todo-app-electron/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/todo-app-electron"],
+      "options": {
+        "jestConfig": "apps/todo-app-electron/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["todo-app"]
+}
