@@ -9,7 +9,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "build:todo": "nx build todo-app --prod",
+    "build-todo:web": "nx build todo-app --prod",
     "build-todo:electron": "npm run compile-todo:electron && npm run pack-todo:electron",
     "compile-todo:electron": "nx run-many --target=build --projects=todo-app,todo-app-electron --parallel && nx export todo-app",
     "pack-todo:electron": "electron-builder --config electron-builder.json --publish never",
