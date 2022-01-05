@@ -28,4 +28,4 @@ jobs:
         with:
           node-version: "14"
       - run: npm install
-      - run: npm build-electron:todo && npm dist-electron:todo
+      - run: npm run build-electron:todo && npm run dist-electron:todo
