@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: sea-turtle-${{ matrix.os }}.nsis
-          path: ./dist/sea-turtle-*.nsis
+          path: ./dist/sea-turtle-*.nsi
           if-no-files-found: error
 
       - name: Upload artifact (macos)
