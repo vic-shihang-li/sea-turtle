@@ -10,9 +10,10 @@
     "build": "nx build",
     "test": "nx test",
     "build:todo": "nx build todo-app --prod",
-    "build-electron:todo": "nx run-many --target=build --projects=todo-app,todo-app-electron --parallel && nx export todo-app",
-    "pack-electron:todo": "electron-builder --dir --config electron-builder.json",
-    "dist-electron:todo": "electron-builder --config electron-builder.json --publish never",
+    "build-todo:electron": "npm run compile-todo:electron && npm run pack-todo:electron",
+    "compile-todo:electron": "nx run-many --target=build --projects=todo-app,todo-app-electron --parallel && nx export todo-app",
+    "pack-todo:electron": "electron-builder --config electron-builder.json --publish never",
+    "packdir-todo:electron": "npm run pack-todo:electron -- --dir",
     "postinstall": "electron-builder install-app-deps"
   },
   "private": true,
