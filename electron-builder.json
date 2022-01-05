@@ -1,14 +1,7 @@
 {
   "appId": "sea.turtle",
   "mac": {
-    "category": "productivity",
-    "target": ["dmg", "zip"]
-  },
-  "win": {
-    "target": ["nsis", "zip"]
-  },
-  "linux": {
-    "target": ["AppImage", "snap", "zip"]
+    "category": "productivity"
   },
   "directories": {},
   "files": ["!**/*", "dist/apps/todo-app", "dist/apps/todo-app-electron"]
