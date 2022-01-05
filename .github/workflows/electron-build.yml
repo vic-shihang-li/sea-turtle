@@ -32,3 +32,9 @@ jobs:
           node-version: "14"
       - run: npm install
       - run: npm run build-todo:electron
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: sea-turtle-${{ matrix.os }}.zip
+          path: dist/sea-turtle-*.zip
+          if-no-files-found: error
