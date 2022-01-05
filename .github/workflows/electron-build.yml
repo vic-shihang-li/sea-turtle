@@ -36,16 +36,13 @@ jobs:
       - name: Build sea-turtle as an electron app
         run: npm run build-todo:electron
 
-      - run: ls dist
-        shell: bash
-
       # upload artifacts (one variant for each os)
       - name: Upload artifact (win)
         if: ${{ matrix.os == 'windows-latest' }}
         uses: actions/upload-artifact@v2
         with:
           name: sea-turtle-${{ matrix.os }}.nsis
-          path: ./dist/sea-turtle-*.nsi
+          path: ./dist/sea-turtle*.exe
           if-no-files-found: error
 
       - name: Upload artifact (macos)
@@ -53,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: sea-turtle-${{ matrix.os }}.zip
-          path: ./dist/sea-turtle-*.zip
+          path: ./dist/sea-turtle*.zip
           if-no-files-found: error
 
       - name: Upload artifact (linux)
@@ -61,5 +58,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: sea-turtle-${{ matrix.os }}.AppImage
-          path: ./dist/sea-turtle-*.AppImage
+          path: ./dist/sea-turtle*.AppImage
           if-no-files-found: error
