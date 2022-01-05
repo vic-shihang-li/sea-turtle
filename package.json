@@ -12,7 +12,7 @@
     "build:todo": "nx build todo-app --prod",
     "build-electron:todo": "nx run-many --target=build --projects=todo-app,todo-app-electron --parallel && nx export todo-app",
     "pack-electron:todo": "electron-builder --dir --config electron-builder.json",
-    "dist-electron:todo": "electron-builder --config electron-builder.json",
+    "dist-electron:todo": "electron-builder --config electron-builder.json --publish never",
     "postinstall": "electron-builder install-app-deps"
   },
   "private": true,
