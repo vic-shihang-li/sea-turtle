@@ -36,5 +36,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: sea-turtle-${{ matrix.os }}.zip
-          path: dist/sea-turtle-*.zip
+          path: ./dist/sea-turtle-*.zip
           if-no-files-found: error
