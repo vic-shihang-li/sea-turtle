@@ -30,13 +30,31 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "14"
+
       - run: npm install
       - run: npm run build-todo:electron
-      - run: ls
-      - run: ls dist
-      - name: Upload artifact
+
+      # upload artifacts (one variant for each os)
+      - name: Upload artifact (win)
+        if: ${{ matrix.os == 'windows-latest' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: sea-turtle-${{ matrix.os }}.nsis
+          path: ./dist/sea-turtle-*.nsis
+          if-no-files-found: error
+
+      - name: Upload artifact (macos)
+        if: ${{ matrix.os == 'macos-latest' }}
         uses: actions/upload-artifact@v2
         with:
           name: sea-turtle-${{ matrix.os }}.zip
           path: ./dist/sea-turtle-*.zip
+          if-no-files-found: error
+
+      - name: Upload artifact (linux)
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: sea-turtle-${{ matrix.os }}.AppImage
+          path: ./dist/sea-turtle-*.AppImage
           if-no-files-found: error
