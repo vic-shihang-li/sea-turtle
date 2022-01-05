@@ -31,8 +31,13 @@ jobs:
         with:
           node-version: "14"
 
-      - run: npm install
-      - run: npm run build-todo:electron
+      - name: Install dependencies
+        run: npm install
+      - name: Build sea-turtle as an electron app
+        run: npm run build-todo:electron
+
+      - run: ls dist
+        shell: bash
 
       # upload artifacts (one variant for each os)
       - name: Upload artifact (win)
