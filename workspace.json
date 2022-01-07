@@ -3,6 +3,7 @@
   "projects": {
     "todo-app": "apps/todo-app",
     "todo-app-e2e": "apps/todo-app-e2e",
-    "todo-app-electron": "apps/todo-app-electron"
+    "todo-app-electron": "apps/todo-app-electron",
+    "todo-server": "apps/todo-server"
   }
 }
