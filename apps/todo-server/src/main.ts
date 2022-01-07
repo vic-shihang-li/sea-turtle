@@ -1,20 +1,31 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
+import { ApolloServer, gql } from "apollo-server-express";
 import * as express from "express";
 
+const typeDefs = gql`
+  type Query {
+    hello: String
+  }
+`;
+
+const resolvers = {
+  Query: {
+    hello: () => "Hello world!",
+  },
+};
+
+const apolloServer = new ApolloServer({ typeDefs, resolvers });
+
 const app = express();
+apolloServer.applyMiddleware({ app });
 
 app.get("/api", (req, res) => {
-  res.send({ message: "Welcome to todo-server!" });
+  res.send({ message: "todo-server is live!" });
 });
 
 const port = process.env.PORT || 3333;
 
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/api`);
+const expressServer = app.listen(port, () => {
+  console.log(`Listening at http://localhost:${port}`);
 });
 
-server.on("error", console.error);
+expressServer.on("error", console.error);
