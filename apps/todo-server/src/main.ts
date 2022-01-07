@@ -15,17 +15,15 @@ const resolvers = {
 
 const apolloServer = new ApolloServer({ typeDefs, resolvers });
 
-const app = express();
-apolloServer.applyMiddleware({ app });
-
-app.get("/api", (req, res) => {
-  res.send({ message: "todo-server is live!" });
-});
-
 const port = process.env.PORT || 3333;
 
-const expressServer = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}`);
-});
+const app = express();
+apolloServer.start().then(() => {
+  apolloServer.applyMiddleware({ app });
 
-expressServer.on("error", console.error);
+  const expressServer = app.listen(port, () => {
+    console.log(`Listening at http://localhost:${port}`);
+  });
+
+  expressServer.on("error", console.error);
+});
