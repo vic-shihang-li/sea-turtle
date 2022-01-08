@@ -20,4 +20,9 @@ function isProjectAffected(projectName, baseCommit, headCommit) {
   return changedProjects.includes(projectName);
 }
 
+const args = process.argv.slice(2);
+if (args.length > 0) {
+  console.log(isProjectAffected(...args));
+}
+
 module.exports = isProjectAffected;
