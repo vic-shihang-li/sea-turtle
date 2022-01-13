@@ -10,6 +10,7 @@
     "build": "nx build",
     "test": "nx test",
     "serve-todo-server:prod": "node ./dist/apps/todo-server/main.js",
+    "is-affected": "./scripts/test-affected.sh",
     "build-todo:web": "nx build todo-app --prod",
     "build-todo:electron": "npm run compile-todo:electron && npm run pack-todo:electron",
     "compile-todo:electron": "nx run-many --target=build --projects=todo-app,todo-app-electron --parallel && nx export todo-app",
