@@ -44,12 +44,12 @@ jobs:
         run: echo ${{ env.ELECTRON_APP_AFFECTED }}
 
       - name: Build sea-turtle as an electron app (if rebuild is required)
-        if: ${{ env.ELECTRON_APP_AFFECTED }}
+        if: ${{ env.ELECTRON_APP_AFFECTED == 'true' }}
         run: npm run build-todo:electron
 
       # upload artifacts (one variant for each os)
       - name: Upload artifact (win)
-        if: ${{ env.ELECTRON_APP_AFFECTED && matrix.os == 'windows-latest' }}
+        if: ${{ env.ELECTRON_APP_AFFECTED == 'true' && matrix.os == 'windows-latest' }}
         uses: actions/upload-artifact@v2
         with:
           name: sea-turtle-${{ matrix.os }}.nsis
@@ -57,7 +57,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload artifact (macos)
-        if: ${{ env.ELECTRON_APP_AFFECTED && matrix.os == 'macos-latest' }}
+        if: ${{ env.ELECTRON_APP_AFFECTED == 'true' && matrix.os == 'macos-latest' }}
         uses: actions/upload-artifact@v2
         with:
           name: sea-turtle-${{ matrix.os }}.zip
@@ -65,7 +65,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload artifact (linux)
-        if: ${{ env.ELECTRON_APP_AFFECTED && matrix.os == 'ubuntu-latest' }}
+        if: ${{ env.ELECTRON_APP_AFFECTED == 'true' && matrix.os == 'ubuntu-latest' }}
         uses: actions/upload-artifact@v2
         with:
           name: sea-turtle-${{ matrix.os }}.AppImage
