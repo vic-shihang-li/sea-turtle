@@ -122,8 +122,8 @@ export default class App {
     // so this class has no dependencies. This
     // makes the code easier to write tests for
 
-    App.BrowserWindow = browserWindow;
-    App.application = app;
+    // App.BrowserWindow = browserWindow;
+    // App.application = app;
 
     App.application.on("window-all-closed", App.onWindowAllClosed); // Quit when all windows are closed.
     App.application.on("ready", App.onReady); // App is ready to load data
