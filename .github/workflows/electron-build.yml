@@ -38,9 +38,10 @@ jobs:
         uses: nrwl/nx-set-shas@v2
 
       - name: Check if electron app is affected
-        run: |
-          echo "ELECTRON_APP_AFFECTED=$(./scripts/test-affected.sh todo-app-electron)" >> $GITHUB_ENV
-          echo "Electron app affected? $ELECTRON_APP_AFFECTED"
+        run: echo "ELECTRON_APP_AFFECTED=$(./scripts/test-affected.sh todo-app-electron)" >> $GITHUB_ENV
+
+      - name: is affected?
+        run: echo ${{ env.ELECTRON_APP_AFFECTED }}
 
       - name: Build sea-turtle as an electron app (if rebuild is required)
         if: ${{ env.ELECTRON_APP_AFFECTED }}
