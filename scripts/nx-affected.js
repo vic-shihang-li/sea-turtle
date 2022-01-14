@@ -22,8 +22,8 @@ const execSync = require("child_process").execSync;
 function isProjectAffected(projectName, baseCommit, headCommit) {
   headCommit = headCommit ? headCommit : "HEAD";
   let getAffected = baseCommit
-    ? `nx print-affected --base=${baseCommit} --head=${headCommit}`
-    : `nx print-affected`;
+    ? `npx nx print-affected --base=${baseCommit} --head=${headCommit}`
+    : `npx nx print-affected`;
 
   const output = execSync(getAffected).toString();
   const changedProjects = JSON.parse(output).projects;
