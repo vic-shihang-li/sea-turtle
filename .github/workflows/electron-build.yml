@@ -41,7 +41,7 @@ jobs:
           echo "HEAD: ${{ env.NX_HEAD }}"
 
       - name: Build sea-turtle as an electron app (if rebuild is required)
-        run: npm run is-affected -- todo-app-electron && npm run build-todo:electron
+        run: npm run is-affected -- todo-app-electron && npm run build-todo:electron || echo "electron app not affected; skipping build."
 
       # upload artifacts (one variant for each os)
       - name: Upload artifact (win)
