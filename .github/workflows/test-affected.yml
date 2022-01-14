@@ -30,7 +30,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "14"
-      - run: npm install
+      - run: npm ci
       - run: npx nx affected --target=test --parallel --max-parallel=2
       - run: npx nx affected --target=e2e --parallel --max-parallel=2
   pr:
