@@ -37,15 +37,18 @@ jobs:
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v2
 
-      - name: Build sea-turtle as an electron app (if rebuild is required)
+      - name: Check if electron app is affected
         run: |
-          npm run is-affected -- todo-app-electron \
-            && npm run build-todo:electron \
-            || echo "Ignore NPM error; electron app not affected, skipping build."
+          echo "ELECTRON_APP_AFFECTED=$(./scripts/test-affected.sh todo-app-electron)" >> $GITHUB_ENV
+          echo "Electron app affected? ${ELECTRON_APP_AFFECTED}"
+
+      - name: Build sea-turtle as an electron app (if rebuild is required)
+        if: ${{ env.ELECTRON_APP_AFFECTED }}
+        run: npm run build-todo:electron
 
       # upload artifacts (one variant for each os)
       - name: Upload artifact (win)
-        if: ${{ matrix.os == 'windows-latest' }}
+        if: ${{ env.ELECTRON_APP_AFFECTED && matrix.os == 'windows-latest' }}
         uses: actions/upload-artifact@v2
         with:
           name: sea-turtle-${{ matrix.os }}.nsis
@@ -53,7 +56,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload artifact (macos)
-        if: ${{ matrix.os == 'macos-latest' }}
+        if: ${{ env.ELECTRON_APP_AFFECTED && matrix.os == 'macos-latest' }}
         uses: actions/upload-artifact@v2
         with:
           name: sea-turtle-${{ matrix.os }}.zip
@@ -61,7 +64,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload artifact (linux)
-        if: ${{ matrix.os == 'ubuntu-latest' }}
+        if: ${{ env.ELECTRON_APP_AFFECTED && matrix.os == 'ubuntu-latest' }}
         uses: actions/upload-artifact@v2
         with:
           name: sea-turtle-${{ matrix.os }}.AppImage
