@@ -39,6 +39,7 @@ jobs:
 
       - name: Check if electron app is affected
         run: echo "ELECTRON_APP_AFFECTED=$(./scripts/test-affected.sh todo-app-electron)" >> $GITHUB_ENV
+        shell: bash
 
       - name: Should rebuild electron app?
         run: echo ${{ env.ELECTRON_APP_AFFECTED }}
