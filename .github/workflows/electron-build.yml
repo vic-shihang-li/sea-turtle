@@ -40,7 +40,7 @@ jobs:
       - name: Check if electron app is affected
         run: |
           echo "ELECTRON_APP_AFFECTED=$(./scripts/test-affected.sh todo-app-electron)" >> $GITHUB_ENV
-          echo "Electron app affected? ${ELECTRON_APP_AFFECTED}"
+          echo "Electron app affected? $ELECTRON_APP_AFFECTED"
 
       - name: Build sea-turtle as an electron app (if rebuild is required)
         if: ${{ env.ELECTRON_APP_AFFECTED }}
