@@ -34,6 +34,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+        run: |
+          echo "BASE: ${{ env.NX_BASE }}"
+          echo "HEAD: ${{ env.NX_HEAD }}"
+
       - name: Build sea-turtle as an electron app (if rebuild is required)
         run: npm run is-affected -- todo-app-electron && npm run build-todo:electron
 
