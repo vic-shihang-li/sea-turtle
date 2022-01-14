@@ -38,7 +38,7 @@ jobs:
         uses: nrwl/nx-set-shas@v2
 
       - name: Check if electron app is affected
-        run: echo "ELECTRON_APP_AFFECTED=$(node ./scripts/test-affected.js todo-app-electron)" >> $GITHUB_ENV
+        run: echo "ELECTRON_APP_AFFECTED=$(node ./scripts/nx-affected.js todo-app-electron)" >> $GITHUB_ENV
         shell: bash
 
       - name: Should rebuild electron app?
